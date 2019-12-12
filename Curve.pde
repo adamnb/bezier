@@ -43,12 +43,14 @@ public class Curve {
   public Vector2 getLerp (float lambda) {
     lambda = constrain (lambda, 0, 1); // Interpolation position
     ArrayList<Vector2> curPoints = new ArrayList<Vector2>();
+    ArrayList<Vector2> newPoints = new ArrayList<Vector2>(); // Temp list
  
     for (ControlPoint p: points) {
       curPoints.add(new Vector2(p.x, p.y));
     }
     
     //while (curPoints.size() > 1) {
+      
       // Interpolate between curPoints and set curPoints to new points
       for (int i = 0; i < curPoints.size()-1; i++) { // Do not include last point
         float x = curPoints.get(i).x + ((curPoints.get(i+1).x - curPoints.get(i).x)*lambda);
@@ -57,9 +59,14 @@ public class Curve {
         strokeWeight(4);
         point (x, y);
         
-        //curPoints.add(new Vector2(x, y));
+        newPoints.add(new Vector2(x, y)); // Add intermediate points to a temporary list
       }
+      println(curPoints.size(), newPoints.size());
+      
+      curPoints = new ArrayList<Vector2>(newPoints); // Update main list
+      println(curPoints.size());
     //}
+    
     
     
     return (new Vector2 (0, 0));
