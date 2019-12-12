@@ -43,11 +43,12 @@ void draw (){
     stroke (240, 0, 0);
     point(lerp.x, lerp.y);
   }*/
-  
+  /*
   for (float l = 0; l <= 1; l += 0.01){
-    println("l:"+l);
+    //println("l:"+l);
     curves.get(0).getLerp(l);
-  }
+  }*/
+  curves.get(0).getLerp(0.5);
 }
 
 void mousePressed(){

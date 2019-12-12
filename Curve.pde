@@ -35,8 +35,9 @@ public class Curve {
         iX = points.get(i).x + 20;
         iY = points.get(i).y + 20;
       }*/
-      
+
     }
+    println(points.size()+" points\n");
   } 
   
   public Vector2 getLerp (float lambda) {
@@ -49,24 +50,29 @@ public class Curve {
     
     //while (curPoints.size() > 1) {
       // Interpolate between curPoints and set curPoints to new points
-      for (int i = 0; i < curPoints.size()-1; i++) { // Do not include last point to prevent e-OOB
-        float x = (curPoints.get(i).x + (curPoints.get(i+1).x - curPoints.get(i).x)) * lambda;
-        float y = (curPoints.get(i).y + (curPoints.get(i+1).y - curPoints.get(i).y)) * lambda;
+      for (int i = 0; i < curPoints.size()-1; i++) { // Do not include last point
+        float x = curPoints.get(i).x + ((curPoints.get(i+1).x - curPoints.get(i).x)*lambda);
+        float y = curPoints.get(i).y + ((curPoints.get(i+1).y - curPoints.get(i).y)*lambda);
         stroke (255, 0, 0);
-        strokeWeight(2);
+        strokeWeight(4);
         point (x, y);
         
         //curPoints.add(new Vector2(x, y));
       }
     //}
     
+    
     return (new Vector2 (0, 0));
   }
   
   public void update (boolean pts, boolean line){
     if (pts){
+      int n = 0;
       for (ControlPoint p: points){
         p.update(true);
+        fill(51, 135, 0);
+        text(n, p.x, p.y);
+        n++;
       }
     }
   }
